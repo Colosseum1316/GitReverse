@@ -1,0 +1,63 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/main/java/**/*.java"
+      - "!.editorconfig"
+      - "!.gitignore"
+      - "!README"
+      - "!README.md"
+      - "!LICENSE"
+      - "!LICENSE.md"
+      - "!COPYING"
+      - "!COPYING.md"
+      - "pom.xml"
+  workflow_dispatch:
+
+
+permissions:
+  contents: read
+
+
+defaults:
+  run:
+    shell: bash
+
+
+jobs:
+  build:
+    name: Build jar on Java ${{ matrix.java-version }} ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        java-version: [8, 11, 17, 21, 25]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: corretto
+          java-version: ${{ matrix.java-version }}
+          cache: maven
+
+      - name: Build
+        run: mvn -B -V -e -ntp -Dstyle.color=always clean verify
+
+      - name: Upload artifacts
+        if: ${{ (github.ref_name == 'main' && github.event_name == 'push') || github.event_name == 'workflow_dispatch' }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: Unparser-${{ github.run_id }}-${{ matrix.os }}-java-${{ matrix.java-version }}
+          path: target/*.jar
+          retention-days: 1
+          overwrite: true
