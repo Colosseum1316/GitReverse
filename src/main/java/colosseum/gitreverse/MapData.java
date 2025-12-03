@@ -1,4 +1,4 @@
-package colosseum.unparser;
+package colosseum.gitreverse;
 
 import colosseum.utility.arcade.GameType;
 import lombok.AllArgsConstructor;

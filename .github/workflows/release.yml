@@ -33,4 +33,4 @@ jobs:
         with:
           name: ${{ github.ref_name }}
           files: |
-            ./target/Unparser-*.jar
+            ./target/GitReverse-*.jar

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>colosseum.minecraft</groupId>
-    <artifactId>Unparser</artifactId>
+    <artifactId>GitReverse</artifactId>
     <version>0.1</version>
 
     <repositories>
@@ -83,7 +83,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>colosseum.unparser.Unparser</mainClass>
+                                    <mainClass>colosseum.gitreverse.GitReverse</mainClass>
                                     <manifestEntries>
                                         <Built-By></Built-By>
                                     </manifestEntries>

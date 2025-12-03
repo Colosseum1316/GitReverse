@@ -1,4 +1,4 @@
-package colosseum.unparser;
+package colosseum.gitreverse;
 
 import colosseum.utility.TeamName;
 import colosseum.utility.WorldMapConstants;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class Unparser {
+public final class GitReverse {
 
     public static void main(String[] args) throws Exception {
         unparseMap(GameType.valueOf(args[0]), new File(args[1]));

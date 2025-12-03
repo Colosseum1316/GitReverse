@@ -1,4 +1,4 @@
-package colosseum.unparser;
+package colosseum.gitreverse;
 
 import lombok.Getter;
 import nl.rutgerkok.hammer.ChunkAccess;
