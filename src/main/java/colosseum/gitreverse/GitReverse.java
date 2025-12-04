@@ -2,7 +2,6 @@ package colosseum.gitreverse;
 
 import colosseum.utility.TeamName;
 import colosseum.utility.WorldMapConstants;
-import colosseum.utility.arcade.GameType;
 import nl.rutgerkok.hammer.ChunkAccess;
 import nl.rutgerkok.hammer.anvil.AnvilChunk;
 import org.apache.commons.io.FileUtils;
@@ -21,21 +20,21 @@ import java.util.Map;
 public final class GitReverse {
 
     public static void main(String[] args) throws Exception {
-        unparseMap(GameType.valueOf(args[0]), new File(args[1]));
+        unparseMap(new File(args[0]));
     }
 
-    public static void unparseMap(final GameType gameType, final File file) throws Exception {
+    public static void unparseMap(final File file) throws Exception {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException("Not a directory: " + file.getAbsolutePath());
         }
         Path directory = file.toPath();
-        final MapData mapData = getMapData(gameType, directory);
+        final MapData mapData = getMapData(directory);
         writeMapDat(mapData, directory);
         unparseMap(mapData, directory);
         FileUtils.deleteQuietly(directory.resolve(WorldMapConstants.WORLDCONFIG_DAT).toFile());
     }
 
-    private static MapData getMapData(final GameType gameType, final Path directory) throws Exception {
+    private static MapData getMapData(final Path directory) throws Exception {
         String name = "null";
         String author = "null";
 
@@ -114,7 +113,7 @@ public final class GitReverse {
         corners[0] = new Location(minX, minY, minZ);
         corners[1] = new Location(maxX, maxY, maxZ);
 
-        return new MapData(name, author, gameType, corners, dataLocations, teamLocsLocations, customLocsLocations);
+        return new MapData(name, author, corners, dataLocations, teamLocsLocations, customLocsLocations);
     }
 
     private static void writeMapDat(final MapData mapData, final Path directory) throws Exception {
@@ -122,8 +121,6 @@ public final class GitReverse {
             out.write("MAP_NAME:" + mapData.name);
             out.write("\n");
             out.write("MAP_AUTHOR:" + mapData.author);
-            out.write("\n");
-            out.write("GAME_TYPE:" + mapData.gameType.name());
             out.write("\n");
             out.write("ADMIN_LIST:");
             out.write("\n");
