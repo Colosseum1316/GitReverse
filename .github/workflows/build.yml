@@ -15,6 +15,20 @@ on:
       - "!COPYING"
       - "!COPYING.md"
       - "pom.xml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/main/java/**/*.java"
+      - "!.editorconfig"
+      - "!.gitignore"
+      - "!README"
+      - "!README.md"
+      - "!LICENSE"
+      - "!LICENSE.md"
+      - "!COPYING"
+      - "!COPYING.md"
+      - "pom.xml"
   workflow_dispatch:
 
 

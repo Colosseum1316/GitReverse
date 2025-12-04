@@ -1,6 +1,5 @@
 package colosseum.gitreverse;
 
-import colosseum.utility.arcade.GameType;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ final class MapData {
 
     public final String name;
     public final String author;
-    public final GameType gameType;
 
     public final Location[] corners;
 
