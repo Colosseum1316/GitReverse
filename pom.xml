@@ -97,7 +97,6 @@
                                     <include>colosseum.minecraft.nl.rutgerkok:hammer</include>
                                     <include>org.apache.commons:commons-lang3</include>
                                     <include>commons-io:commons-io</include>
-                                    <include>org.jetbrains.kotlin:kotlin-stdlib</include>
                                     <include>com.google.guava:guava</include>
                                     <include>com.googlecode.json-simple:json-simple</include>
                                 </includes>
