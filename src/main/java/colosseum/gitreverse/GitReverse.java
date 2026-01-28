@@ -1,7 +1,7 @@
 package colosseum.gitreverse;
 
 import colosseum.utility.TeamName;
-import colosseum.utility.WorldMapConstants;
+import colosseum.utility.MapConstants;
 import nl.rutgerkok.hammer.ChunkAccess;
 import nl.rutgerkok.hammer.anvil.AnvilChunk;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +31,7 @@ public final class GitReverse {
         final MapData mapData = getMapData(directory);
         writeMapDat(mapData, directory);
         unparseMap(mapData, directory);
-        FileUtils.deleteQuietly(directory.resolve(WorldMapConstants.WORLDCONFIG_DAT).toFile());
+        FileUtils.deleteQuietly(directory.resolve(MapConstants.WORLDCONFIG_DAT).toFile());
     }
 
     private static MapData getMapData(final Path directory) throws Exception {
@@ -42,7 +42,7 @@ public final class GitReverse {
         final HashMap<String, ArrayList<Location>> teamLocsLocations = new HashMap<>();
         final HashMap<String, ArrayList<Location>> customLocsLocations = new HashMap<>();
 
-        final List<String> lines = Files.readAllLines(directory.resolve(WorldMapConstants.WORLDCONFIG_DAT));
+        final List<String> lines = Files.readAllLines(directory.resolve(MapConstants.WORLDCONFIG_DAT));
         List<Location> current = null;
         int minX = -256, minY = 0, minZ = -256, maxX = 256, maxY = 256, maxZ = 256;
 
@@ -117,7 +117,7 @@ public final class GitReverse {
     }
 
     private static void writeMapDat(final MapData mapData, final Path directory) throws Exception {
-        try (final BufferedWriter out = Files.newBufferedWriter(directory.resolve(WorldMapConstants.MAP_DAT))) {
+        try (final BufferedWriter out = Files.newBufferedWriter(directory.resolve(MapConstants.MAP_DAT))) {
             out.write("MAP_NAME:" + mapData.name);
             out.write("\n");
             out.write("MAP_AUTHOR:" + mapData.author);
